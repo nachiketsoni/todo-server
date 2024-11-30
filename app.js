@@ -21,7 +21,7 @@ const swaggerUi = require("swagger-ui-express");
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://todo-nine-ecru.vercel.app',  // Allow requests from the frontend domain
+    origin: '*',  // Allow requests from the frontend domain
     methods: ['GET', 'POST', 'PUT', 'DELETE'],   // Allow these HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'],  // Allowed headers
     credentials: true  // Allow cookies and authentication credentials to be sent
