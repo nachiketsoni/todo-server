@@ -27,11 +27,8 @@ const corsOptions = {
     credentials: true  // Allow cookies and authentication credentials to be sent
   };
   
-  // Apply CORS middleware globally to all routes
-  app.use(cors(corsOptions));
-  
-  // Handle preflight (OPTIONS) requests explicitly
-  app.options('*', cors(corsOptions));  // Enable CORS for preflight requests
+  app.use(cors());
+  app.options("*", cors());
   
 app.use(helmet.hidePoweredBy());
 app.use(limiter);
