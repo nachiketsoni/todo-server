@@ -19,12 +19,12 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 
+app.options("*", cors());
 app.use(cors({
     origin: "*",  // Your frontend domain
     methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
     credentials: true  // Allow cookies or authentication credentials if needed
   }));
-app.options("*", cors());
 
 app.use(helmet.hidePoweredBy());
 app.use(limiter);
