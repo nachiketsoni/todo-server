@@ -19,7 +19,9 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 
-app.use(cors());
+app.use(cors({
+    origin: "https://todo-server-nine-psi.vercel.app",
+}));
 app.options("*", cors());
 
 app.use(helmet.hidePoweredBy());
