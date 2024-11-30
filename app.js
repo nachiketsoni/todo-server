@@ -19,13 +19,20 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 
-app.options("*", cors());
-app.use(cors({
-    origin: "*",  // Your frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
-    credentials: true  // Allow cookies or authentication credentials if needed
-  }));
-
+// CORS configuration
+const corsOptions = {
+    origin: 'https://todo-nine-ecru.vercel.app',  // Allow requests from the frontend domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],   // Allow these HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'],  // Allowed headers
+    credentials: true  // Allow cookies and authentication credentials to be sent
+  };
+  
+  // Apply CORS middleware globally to all routes
+  app.use(cors(corsOptions));
+  
+  // Handle preflight (OPTIONS) requests explicitly
+  app.options('*', cors(corsOptions));  // Enable CORS for preflight requests
+  
 app.use(helmet.hidePoweredBy());
 app.use(limiter);
 
