@@ -19,16 +19,22 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 
+
 // CORS configuration
 const corsOptions = {
-    origin: '*',  // Allow requests from the frontend domain
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],   // Allow these HTTP methods
+    origin: '*',  // Frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],   // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'],  // Allowed headers
-    credentials: true  // Allow cookies and authentication credentials to be sent
+    credentials: true,  // Allow credentials (cookies, authentication headers)
+    preflightContinue: false,  // Handle preflight request within this middleware
+    optionsSuccessStatus: 200,  // For older browsers that expect status 200 instead of 204
   };
   
-  app.use(cors());
-  app.options("*", cors());
+  // Apply CORS middleware globally
+  app.use(cors(corsOptions));
+  
+  // Explicitly handle OPTIONS requests for preflight
+  app.options('*', cors(corsOptions));  // Handle preflight for all routes
   
 app.use(helmet.hidePoweredBy());
 app.use(limiter);
